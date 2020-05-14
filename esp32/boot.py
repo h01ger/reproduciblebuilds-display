@@ -11,7 +11,7 @@ import ntptime
 import urequests
 from generic_dotstar import DotStar
 
-version='23.37'
+version='23.38'
 
 # Status url
 url = 'https://tests.reproducible-builds.org/trbo.status'
@@ -180,8 +180,7 @@ def get_repro_status():
     try:
         print('Defining color based on trbo.status', (int(r.text)))
         g = int(r.text)
-        o = 255-int(r.text)
-        status_color = (o, g, 23, intensity)
+        status_color = (0, g, 0, intensity)
     except Exception:
         print('Unable to parse response.')
 	red_color = (204, 0, 0, intensity)
