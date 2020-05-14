@@ -11,7 +11,7 @@ import ntptime
 import urequests
 from generic_dotstar import DotStar
 
-version='23.36'
+version='23.37'
 
 # Status url
 url = 'https://tests.reproducible-builds.org/trbo.status'
@@ -154,8 +154,18 @@ def connectwifi():
 
 
 def staticdisplay(color):
-    for i in range(0, num_pixels):
-        pixels[i] = color
+    # if intensity != 1, display color on all pixels
+    if color[3] != 1:
+        for i in range(0, num_pixels):
+            pixels[i] = color
+    else:
+        # else, only light the logo at night...
+        for i in range(0, num_pixels):
+            if i == 4 or i == 5:
+                pixels[i] = color
+            else:
+                pixels[i] = (0, 0, 0, 0)
+
     pixels.show()
 
 
